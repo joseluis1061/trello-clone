@@ -40,7 +40,6 @@ export class TodoDialogComponent {
     @Inject(DIALOG_DATA) data: InputData
   ) {
     this.card = data.card;
-    console.log(data)
   }
 
   close() {
