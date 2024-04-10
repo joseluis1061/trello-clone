@@ -84,12 +84,12 @@ export class BoardComponent implements OnInit{
     });
   }
 
-  openDialog(todo: Card) {
+  openDialog(card: Card) {
     const dialogRef = this.dialog.open(TodoDialogComponent, {
       minWidth: '300px',
       maxWidth: '50%',
       data: {
-        todo: todo,
+        card: card,
       },
     });
     dialogRef.closed.subscribe((output) => {
