@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import {
   CdkDragDrop,
   moveItemInArray,
@@ -6,9 +6,14 @@ import {
 } from '@angular/cdk/drag-drop';
 import { Dialog } from '@angular/cdk/dialog';
 import { TodoDialogComponent } from '@boards/components/todo-dialog/todo-dialog.component';
+import { BoardsService } from '@services/boards.service';
+import { Board } from '@models/boards.model';
 
 import { ToDo, Column } from '@models/todo.model';
-
+import { ActivatedRoute } from '@angular/router';
+import { reduce } from 'rxjs';
+import { List } from '@models/list.model';
+import { Card } from '@models/card.model';
 @Component({
   selector: 'app-board',
   templateUrl: './board.component.html',
@@ -23,44 +28,39 @@ import { ToDo, Column } from '@models/todo.model';
     `,
   ],
 })
-export class BoardComponent {
-  columns: Column[] = [
-    {
-      title: 'ToDo',
-      todos: [
-        {
-          id: '1',
-          title: 'Make dishes',
-        },
-        {
-          id: '2',
-          title: 'Buy a unicorn',
-        },
-      ],
-    },
-    {
-      title: 'Doing',
-      todos: [
-        {
-          id: '3',
-          title: 'Watch Angular Path in Platzi',
-        },
-      ],
-    },
-    {
-      title: 'Done',
-      todos: [
-        {
-          id: '4',
-          title: 'Play video games',
-        },
-      ],
-    },
-  ];
+export class BoardComponent implements OnInit{
+  id: string | null = null;
+  board: Board | null = null;
 
-  constructor(private dialog: Dialog) {}
+  columns: Column[] = [];
+  lists: List[] | null  = null;
 
-  drop(event: CdkDragDrop<ToDo[]>) {
+  constructor(
+    private dialog: Dialog,
+    private boardsService: BoardsService,
+    private activatedRoute: ActivatedRoute
+  ) {
+
+  }
+
+  ngOnInit(): void {
+    this.activatedRoute.paramMap.subscribe((params) => {
+        this.id = params.get('boardId');
+        if(this.id) this.getBoardDetail(this.id);
+      }
+    );
+  }
+
+  getBoardDetail(id:string){
+    this.boardsService.getBoard(id).subscribe({
+      next: (response) => {
+        this.board = response;
+        this.lists = response.lists;
+      },
+      error: error => { console.log(error) }
+    })
+  }
+  drop(event: CdkDragDrop<Card[]>) {
     if (event.previousContainer === event.container) {
       moveItemInArray(
         event.container.data,
@@ -84,7 +84,7 @@ export class BoardComponent {
     });
   }
 
-  openDialog(todo: ToDo) {
+  openDialog(todo: Card) {
     const dialogRef = this.dialog.open(TodoDialogComponent, {
       minWidth: '300px',
       maxWidth: '50%',
