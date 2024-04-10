@@ -1,8 +1,9 @@
-import { User } from "./user.model"
+import { User } from "./user.model";
+import { Colors } from "./color.model";
 export interface Board {
   id: number,
   title: string,
-  backgroundColor:'sky' | 'yellow' | 'green' | 'red' | 'violet' | 'gray',
+  backgroundColor: Colors,
   updatedAt: string,
   members: User[]
 }
