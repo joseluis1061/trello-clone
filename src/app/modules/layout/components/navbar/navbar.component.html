@@ -97,7 +97,7 @@
         <img class="w-10 h-10 rounded-full" [src]="user?.avatar" alt="" />
         <div class="space-y-1">
           <div>{{ user?.name }}</div>
-          <div class="text-sm text-gray-500">{{ user?.email }}</div>
+          <div class="text-sm text-gray-500">{{ user?.name }}</div>
         </div>
       </div>
       <ul class="py-1">
@@ -183,105 +183,7 @@
         </button>
       </div>
       <div class="py-3 px-4 flex justify-between">
-        <form action="">
-          <div class="flex flex-wrap">
-            <div class="flex items-center me-4">
-              <input
-                checked
-                id="sky-radio"
-                type="radio"
-                value=""
-                name="colored-radio"
-                class="hidden peer"
-              />
-              <label
-                for="sky-radio"
-                class="inline-flex items-center justify-center w-14 h-8 text-transparent border border-gray-200 rounded cursor-pointer bg-sky-700 hover:bg-sky-500 peer-checked:text-white"
-                >Sky</label
-              >
-            </div>
-
-            <div class="flex items-center me-4">
-              <input
-                id="yellow-radio"
-                type="radio"
-                value=""
-                name="colored-radio"
-                class="hidden peer"
-              />
-              <label
-                for="yellow-radio"
-                class="inline-flex items-center justify-center w-14 h-8 text-transparent border border-gray-200 rounded cursor-pointer bg-yellow-700 hover:bg-yellow-500 peer-checked:text-white"
-              >Yellow
-              </label>
-            </div>
-
-            <div class="flex items-center me-4">
-              <input
-                id="green-radio"
-                type="radio"
-                value=""
-                name="colored-radio"
-                class="hidden peer"
-              />
-              <label
-                for="green-radio"
-                class="inline-flex items-center justify-center w-14 h-8 text-transparent border border-gray-200 rounded cursor-pointer
-                bg-green-700 hover:bg-green-500 peer-checked:text-white"
-              >Green
-              </label>
-            </div>
-
-            <div class="flex items-center me-4">
-              <input
-                id="red-radio"
-                type="radio"
-                value=""
-                name="colored-radio"
-                class="hidden peer"
-              />
-              <label
-                for="red-radio"
-                class="inline-flex items-center justify-center w-14 h-8 text-transparent border border-gray-200 rounded cursor-pointer
-                bg-red-700 hover:bg-red-500 peer-checked:text-white"
-              >Red
-              </label>
-            </div>
-
-            <div class="flex items-center me-4">
-              <input
-                id="violet-radio"
-                type="radio"
-                value=""
-                name="colored-radio"
-                class="hidden peer"
-              />
-              <label
-                for="violet-radio"
-                class="inline-flex items-center justify-center w-14 h-8 text-transparent border border-gray-200 rounded cursor-pointer
-                bg-violet-700 hover:bg-violet-500 peer-checked:text-white"
-              >Violet
-              </label>
-            </div>
-
-            <div class="flex items-center me-4">
-              <input
-                id="gray-radio"
-                type="radio"
-                value=""
-                name="colored-radio"
-                class="hidden peer"
-              />
-              <label
-                for="gray-radio"
-                class="inline-flex items-center justify-center w-14 h-8 text-transparent border border-gray-200 rounded cursor-pointer
-                bg-gray-700 hover:bg-gray-500 peer-checked:text-white"
-              >Gray
-              </label>
-            </div>
-
-          </div>
-        </form>
+        <app-form-create-board (closeOverlayCreateBoard)="closeOverlayCreateBoard($event)"></app-form-create-board>
       </div>
     </div>
   </ng-template>

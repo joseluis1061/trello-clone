@@ -49,6 +49,6 @@ export class BoardsService {
   }
 
   createBoard(title: string, backgroundColor: string){
-    return this.http.post(`${this.apiUrl}/boards`, {title, backgroundColor}, {context: checkToken()})
+    return this.http.post<Board>(`${this.apiUrl}/api/v1/boards`, {title: title, backgroundColor: backgroundColor}, {context: checkToken()})
   }
 }

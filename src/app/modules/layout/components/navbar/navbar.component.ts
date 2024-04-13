@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+
 import { Router } from '@angular/router';
 import {
   faBell,
@@ -33,6 +34,10 @@ export class NavbarComponent {
   logout() {
     this.authService.logout();
     this.router.navigate(['/login']);
+  }
+
+  closeOverlayCreateBoard(close: boolean){
+    this.isOpenCreateOverlayBoards = close;
   }
 
 }
