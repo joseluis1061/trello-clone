@@ -9,11 +9,13 @@ import { TodoDialogComponent } from '@boards/components/todo-dialog/todo-dialog.
 import { BoardsService } from '@services/boards.service';
 import { Board } from '@models/boards.model';
 
+import { CardService } from '@services/card.service';
+
 import { ToDo, Column } from '@models/todo.model';
 import { ActivatedRoute } from '@angular/router';
 import { reduce } from 'rxjs';
 import { List } from '@models/list.model';
-import { Card } from '@models/card.model';
+import { Card, UpdateCardDto } from '@models/card.model';
 @Component({
   selector: 'app-board',
   templateUrl: './board.component.html',
@@ -38,7 +40,8 @@ export class BoardComponent implements OnInit{
   constructor(
     private dialog: Dialog,
     private boardsService: BoardsService,
-    private activatedRoute: ActivatedRoute
+    private activatedRoute: ActivatedRoute,
+    private cardService: CardService
   ) {
 
   }
@@ -75,6 +78,10 @@ export class BoardComponent implements OnInit{
         event.currentIndex
       );
     }
+    const newPosition  = this.boardsService.getPosition(event.container.data, event.currentIndex);
+    const card = event.container.data[event.currentIndex];
+    const listId = event.container.id;
+    this.updateCard(card, newPosition, listId);
   }
 
   addColumn() {
@@ -96,6 +103,15 @@ export class BoardComponent implements OnInit{
       if (output) {
         console.log(output);
       }
+    });
+  }
+
+  updateCard(card: Card, position: number, listId: string | number){
+    this.cardService.update(card.id, { position, listId }).subscribe({
+      next: (cardUpdate) => {
+        console.log("Actualizació: ", cardUpdate);
+      },
+      error: (error) => console.log(error)
     });
   }
 }
