@@ -26,10 +26,23 @@
               </app-btn>
             </li>
             <li>
-              <a routerLink="/app/users" class="block py-3 px-4 text-white">Users</a>
+              <a routerLink="/app/users" class="block py-3 px-4 text-white"
+                >Users</a
+              >
             </li>
             <li>
-              <app-btn typeBtn="button" color="sky">Create</app-btn>
+              <app-btn
+                typeBtn="button"
+                color="sky"
+                (click)="isOpenCreateOverlayBoards = !isOpenCreateOverlayBoards"
+                cdkOverlayOrigin
+                #boardsCreateOverlay="cdkOverlayOrigin"
+              >
+                <span class="flex space-x-2 text-left">
+                  Create
+                  <fa-icon [icon]="faAngleDown" class="ml-2"></fa-icon>
+                </span>
+              </app-btn>
             </li>
           </ul>
         </div>
@@ -81,11 +94,7 @@
         </button>
       </div>
       <div class="py-3 px-4 flex items-center space-x-4">
-        <img
-          class="w-10 h-10 rounded-full"
-          [src]="user?.avatar"
-          alt=""
-        />
+        <img class="w-10 h-10 rounded-full" [src]="user?.avatar" alt="" />
         <div class="space-y-1">
           <div>{{ user?.name }}</div>
           <div class="text-sm text-gray-500">{{ user?.email }}</div>
@@ -95,32 +104,37 @@
         <li>
           <a
             routerLink="/app/profile"
-            class="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600"
+            class="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-700"
             >Profile</a
           >
         </li>
         <li>
           <a
-            class="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600"
+            class="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-700"
             >Activity</a
           >
         </li>
         <li>
           <a
-            class="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600"
+            class="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-700"
             >Cards</a
           >
         </li>
         <li>
           <a
-            class="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600"
+            class="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-700"
             >Settings</a
           >
         </li>
       </ul>
       <ul class="py-1">
         <li>
-          <button class="block py-2 px-4 text-sm text-gray-700" (click)="logout()">Log out</button>
+          <button
+            class="block py-2 px-4 text-sm text-gray-700"
+            (click)="logout()"
+          >
+            Log out
+          </button>
         </li>
       </ul>
     </div>
@@ -148,4 +162,127 @@
     </div>
   </ng-template>
 
+  <ng-template
+    cdkConnectedOverlay
+    [cdkConnectedOverlayOrigin]="boardsCreateOverlay"
+    [cdkConnectedOverlayOpen]="isOpenCreateOverlayBoards"
+    (overlayOutsideClick)="
+      isOpenCreateOverlayBoards = !isOpenCreateOverlayBoards
+    "
+  >
+    <div
+      class="z-50 my-4 w-60 text-base list-none bg-white rounded divide-y divide-gray-100 shadow"
+    >
+      <div class="py-2 px-4 text-center relative">
+        <span class="block text-normal text-gray-900">Create</span>
+        <button
+          (click)="isOpenCreateOverlayBoards = !isOpenCreateOverlayBoards"
+          class="block text-sm text-gray-900 absolute right-3 top-3"
+        >
+          <fa-icon [icon]="faClose"></fa-icon>
+        </button>
+      </div>
+      <div class="py-3 px-4 flex justify-between">
+        <form action="">
+          <div class="flex flex-wrap">
+            <div class="flex items-center me-4">
+              <input
+                checked
+                id="sky-radio"
+                type="radio"
+                value=""
+                name="colored-radio"
+                class="hidden peer"
+              />
+              <label
+                for="sky-radio"
+                class="inline-flex items-center justify-center w-14 h-8 text-transparent border border-gray-200 rounded cursor-pointer bg-sky-700 hover:bg-sky-500 peer-checked:text-white"
+                >Sky</label
+              >
+            </div>
+
+            <div class="flex items-center me-4">
+              <input
+                id="yellow-radio"
+                type="radio"
+                value=""
+                name="colored-radio"
+                class="hidden peer"
+              />
+              <label
+                for="yellow-radio"
+                class="inline-flex items-center justify-center w-14 h-8 text-transparent border border-gray-200 rounded cursor-pointer bg-yellow-700 hover:bg-yellow-500 peer-checked:text-white"
+              >Yellow
+              </label>
+            </div>
+
+            <div class="flex items-center me-4">
+              <input
+                id="green-radio"
+                type="radio"
+                value=""
+                name="colored-radio"
+                class="hidden peer"
+              />
+              <label
+                for="green-radio"
+                class="inline-flex items-center justify-center w-14 h-8 text-transparent border border-gray-200 rounded cursor-pointer
+                bg-green-700 hover:bg-green-500 peer-checked:text-white"
+              >Green
+              </label>
+            </div>
+
+            <div class="flex items-center me-4">
+              <input
+                id="red-radio"
+                type="radio"
+                value=""
+                name="colored-radio"
+                class="hidden peer"
+              />
+              <label
+                for="red-radio"
+                class="inline-flex items-center justify-center w-14 h-8 text-transparent border border-gray-200 rounded cursor-pointer
+                bg-red-700 hover:bg-red-500 peer-checked:text-white"
+              >Red
+              </label>
+            </div>
+
+            <div class="flex items-center me-4">
+              <input
+                id="violet-radio"
+                type="radio"
+                value=""
+                name="colored-radio"
+                class="hidden peer"
+              />
+              <label
+                for="violet-radio"
+                class="inline-flex items-center justify-center w-14 h-8 text-transparent border border-gray-200 rounded cursor-pointer
+                bg-violet-700 hover:bg-violet-500 peer-checked:text-white"
+              >Violet
+              </label>
+            </div>
+
+            <div class="flex items-center me-4">
+              <input
+                id="gray-radio"
+                type="radio"
+                value=""
+                name="colored-radio"
+                class="hidden peer"
+              />
+              <label
+                for="gray-radio"
+                class="inline-flex items-center justify-center w-14 h-8 text-transparent border border-gray-200 rounded cursor-pointer
+                bg-gray-700 hover:bg-gray-500 peer-checked:text-white"
+              >Gray
+              </label>
+            </div>
+
+          </div>
+        </form>
+      </div>
+    </div>
+  </ng-template>
 </ng-container>
