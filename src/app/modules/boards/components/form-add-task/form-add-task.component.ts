@@ -18,7 +18,7 @@ export class FormAddTaskComponent implements OnInit {
     })
   }
 
-  onSubmit(){
+  createCard(){
     if(this.formTask.valid){
       const newTask = this.formTask.getRawValue();
     }

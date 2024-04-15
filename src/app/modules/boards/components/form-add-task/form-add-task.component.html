@@ -1,7 +1,7 @@
-<form [formGroup]="formTask" (ngSubmit)="onSubmit()">
-  <label>
-    Task:
-    <input type="text" formControlName="task" class="w-full rounded border-none border">
+<form [formGroup]="formTask" (ngSubmit)="createCard()">
+  <label id="task">
+    New task:
+    <textarea name="task" type="textarea" formControlName="task" class="w-full rounded border-none border"></textarea>
   </label>
 
   <div *ngIf="formTask?.get('task')?.invalid && (formTask?.get('task')?.dirty || formTask?.get('task')?.touched)">
@@ -13,9 +13,9 @@
     </div>
   </div>
 
-  <div class="flex justify-start items-center gap-3">
-    <app-btn type="submit" color="primary" (click)="onSubmit()" class="mt-2">Enviar</app-btn>
-    <fa-icon [icon]="faX" (click)="onClose()"></fa-icon>
+  <div class="flex justify-around items-center gap-3">
+    <app-btn type="submit" color="primary" (click)="createCard()" class="mt-2">Create</app-btn>
+    <app-btn type="button" color="light" (click)="onClose()" class="mt-2">Close <fa-icon [icon]="faX"></fa-icon></app-btn>
   </div>
 
 </form>
