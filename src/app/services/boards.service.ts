@@ -13,7 +13,7 @@ import { Card } from '@models/card.model';
 export class BoardsService {
 
   apiUrl = environment.API_URL;
-  bufferState = 65535;
+  bufferSpace = 65535;
 
   constructor(private http: HttpClient) {}
 
@@ -29,7 +29,7 @@ export class BoardsService {
     const lastIndex = cards.length -1;
     // New
     if(cards.length === 1){
-      return this.bufferState;
+      return this.bufferSpace;
     }
     // Top
     if(cards.length > 1 && currentIndex === 0){
@@ -43,12 +43,20 @@ export class BoardsService {
     }
     // End
     if(cards.length > 1 && currentIndex === lastIndex){
-      return cards[cards.length - 1].position + this.bufferState;
+      return cards[cards.length - 1].position + this.bufferSpace;
     }
     return -1;
   }
 
   createBoard(title: string, backgroundColor: string){
     return this.http.post<Board>(`${this.apiUrl}/api/v1/boards`, {title: title, backgroundColor: backgroundColor}, {context: checkToken()})
+  }
+
+  getPositionNewTask(cards: Card[]){
+    if(cards.length === 0){
+      return this.bufferSpace;
+    }else{
+      return cards[cards.length-1].position + this.bufferSpace;
+    }
   }
 }
