@@ -9,4 +9,5 @@ export interface List {
   members: User[];
   lists: List[];
   cards: Card[];
+  showCardForm: boolean;
 }

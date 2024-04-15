@@ -1,0 +1,21 @@
+<form [formGroup]="formTask" (ngSubmit)="onSubmit()">
+  <label>
+    Task:
+    <input type="text" formControlName="task" class="w-full rounded border-none border">
+  </label>
+
+  <div *ngIf="formTask?.get('task')?.invalid && (formTask?.get('task')?.dirty || formTask?.get('task')?.touched)">
+    <div *ngIf="formTask?.get('task')?.errors?.['required']" class="text-red-700">
+      Task is required.
+    </div>
+    <div *ngIf="formTask?.get('task')?.errors?.['minlength']" class="text-red-700">
+      Task must be a min of 3 characters.
+    </div>
+  </div>
+
+  <div class="flex justify-start items-center gap-3">
+    <app-btn type="submit" color="primary" (click)="onSubmit()" class="mt-2">Enviar</app-btn>
+    <fa-icon [icon]="faX" (click)="onClose()"></fa-icon>
+  </div>
+
+</form>

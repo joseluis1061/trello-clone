@@ -16,6 +16,9 @@ import { ActivatedRoute } from '@angular/router';
 import { reduce } from 'rxjs';
 import { List } from '@models/list.model';
 import { Card, UpdateCardDto } from '@models/card.model';
+import { faPlus } from '@fortawesome/free-solid-svg-icons';
+
+//<i class="fa-solid fa-plus"></i>
 @Component({
   selector: 'app-board',
   templateUrl: './board.component.html',
@@ -36,6 +39,8 @@ export class BoardComponent implements OnInit{
 
   columns: Column[] = [];
   lists: List[] | null  = null;
+
+  faPlus = faPlus;
 
   constructor(
     private dialog: Dialog,
@@ -113,5 +118,33 @@ export class BoardComponent implements OnInit{
       },
       error: (error) => console.log(error)
     });
+  }
+
+  changeShowCardForm(list: List){
+    if(this.lists){
+      this.lists = this.lists.map(itemList => {
+        if(list.id === itemList.id){
+          return{
+            ...itemList,
+            showCardForm: true
+          }
+        }else{
+          return{
+            ...itemList,
+            showCardForm: false
+          }
+        }
+      })
+    }
+  }
+  closeCards(event:boolean){
+    if(this.lists){
+      this.lists = this.lists.map(itemList=> {
+        return {
+          ...itemList,
+          showCardForm: false
+        }
+      })
+    }
   }
 }

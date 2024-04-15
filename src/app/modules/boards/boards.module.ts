@@ -10,13 +10,16 @@ import { BoardsRoutingModule } from './boards-routing.module';
 import { BoardsComponent } from './pages/boards/boards.component';
 import { BoardComponent } from './pages/board/board.component';
 import { TodoDialogComponent } from './components/todo-dialog/todo-dialog.component';
+import { FormAddTaskComponent } from './components/form-add-task/form-add-task.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
   declarations: [
     BoardsComponent,
     BoardComponent,
-    TodoDialogComponent
+    TodoDialogComponent,
+    FormAddTaskComponent
   ],
   imports: [
     CommonModule,
@@ -25,7 +28,8 @@ import { TodoDialogComponent } from './components/todo-dialog/todo-dialog.compon
     DragDropModule,
     CdkAccordionModule,
     DialogModule,
-    FontAwesomeModule
+    FontAwesomeModule,
+    ReactiveFormsModule
   ]
 })
 export class BoardsModule { }
